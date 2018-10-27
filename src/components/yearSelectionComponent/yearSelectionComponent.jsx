@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './yearSelectionComponent.css';
 import YearItemComponent from './yearItemComponent/yearItemComponent';
-import { Form, FormGroup, Col, Label, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export default class YearSelectionComponent extends Component {
     constructor(props) {
