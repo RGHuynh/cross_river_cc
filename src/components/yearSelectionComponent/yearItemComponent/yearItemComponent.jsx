@@ -1,8 +1,10 @@
 import React from 'react';
+import { DropdownItem } from 'reactstrap';
 import './yearItemComponent.css';
+
 
 export default function YearItemComponent({year, value}) {
     return(
-        <option value={value}>{year}</option>
+        <DropdownItem onClick={this.changeValue}>test</DropdownItem>
     );
 }
