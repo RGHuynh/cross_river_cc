@@ -12,7 +12,7 @@ export default class YearSelectionComponent extends Component {
         this.get_aws_s3_content = this.get_aws_s3_content.bind(this);
         this.state = {
             dropdownOpen: false,
-            dropdownValue: '2012'
+            dropdownValue: '2007'
         };
     }
     
@@ -69,7 +69,6 @@ export default class YearSelectionComponent extends Component {
                         </div>
                     </div>
                     <button className="ml-3 btn-primary">Generate Report</button>
-                    <p>{this.get_aws_s3_content()}</p>
                 </form>
             </div>
         );

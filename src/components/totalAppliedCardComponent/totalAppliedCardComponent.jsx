@@ -9,10 +9,10 @@ export default function TotalAppliedCardComponent({heading, amount}) {
     })
     
     return(
-        <div>
-            <h1>{ heading }</h1>
+        <div className="card card--size card--style mx-auto">
+            <h1 className="card-title card-title--size mt-3">{ heading }</h1>
             <hr></hr>
-            <h2>{ currencyFormat.format(amount) }</h2>
+            <h2 className="card-price--position mb-4">{ currencyFormat.format(amount) }</h2>
         </div>
     );
 
