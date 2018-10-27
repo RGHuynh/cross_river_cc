@@ -34,6 +34,8 @@ export default class HomepageCompenent extends Component {
         let sqlCommand = "SELECT " + column + " FROM s3object WHERE issue_d LIKE(" + "'%" + this.state.dropdownValue + "%'" + ")"
         AwsHTTPService().get_aws_s3_content(sqlCommand, (err, data) =>{
             const eventStream = data.Payload;
+
+            if(err) return
             let aws_items = eventStream[0].Records.Payload
             
             let aws_formated_items = aws_items.toString().replace(/\n/g, ' ').split(" ")

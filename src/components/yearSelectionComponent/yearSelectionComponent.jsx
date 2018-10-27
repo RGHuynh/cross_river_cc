@@ -8,11 +8,9 @@ export default class YearSelectionComponent extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
-        // this.changeValue = this.changeValue.bind(this);
         this.get_aws_s3_content = this.get_aws_s3_content.bind(this);
         this.state = {
-            dropdownOpen: false,
-            // dropdownValue: '2007'
+            dropdownOpen: false
         };
     }
     
@@ -21,14 +19,6 @@ export default class YearSelectionComponent extends Component {
             dropdownOpen: !prevState.dropdownOpen
         }));
     }
-
-    // changeValue(e) {
-    //     this.setState({
-    //         dropdownOpen: !e.dropdownOpen,
-    //         dropdownValue: e.target.innerText
-
-    //     })
-    // }
 
     get_aws_s3_content(){
         let loan_dates = [];
