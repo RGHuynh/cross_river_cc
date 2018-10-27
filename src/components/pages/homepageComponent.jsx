@@ -86,7 +86,9 @@ export default class HomepageCompenent extends Component {
                     <TotalAppliedCardComponent heading="Total Amount Funded" amount={this.state.funded_amount_total}/>
                     <TotalAppliedCardComponent heading="Total Committed by Investors" amount={this.state.funded_amount_inv_total}/>
                 </div>
-                <LineChartComponent />
+                <div className="line-chart--wrapper">
+                    <LineChartComponent />
+                </div>
             </div>
         )
     }

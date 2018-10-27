@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import './yearSelectionComponent.css';
-import YearItemComponent from './yearItemComponent/yearItemComponent';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import AwsHTTPService from '../../services/awsHTTPService/awsHTTPService';
 
 export default class YearSelectionComponent extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.get_aws_s3_content = this.get_aws_s3_content.bind(this);
         this.state = {
             dropdownOpen: false
         };
