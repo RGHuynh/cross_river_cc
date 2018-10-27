@@ -20,17 +20,6 @@ export default class YearSelectionComponent extends Component {
         }));
     }
 
-    get_aws_s3_content(){
-        let loan_dates = [];
-        let sqlCommand = "SELECT issue_d FROM s3object WHERE issue_d LIKE(" + "'%" + this.state.dropdownValue + "%'" + ")"
-        AwsHTTPService().get_aws_s3_content(sqlCommand, ( err, data) =>{
-            const eventStream = data.Payload;
-            let aws_items = eventStream[0].Records.Payload
-            
-            let aws_formated_items = aws_items.toString().replace(/\n/g, ' ').split(" ")
-            
-        })
-    }
     render(){
         return(
             <div className="form-wrapper w-100">
