@@ -43,7 +43,7 @@ export default class YearSelectionComponent extends Component {
                             </ButtonDropdown>
                         </div>
                     </div>
-                    <button className="ml-3 btn-primary">Generate Report</button>
+                    <button onClick={this.props.changeCardValue} className="ml-3 btn-primary">Generate Report</button>
                 </form>
             </div>
         );

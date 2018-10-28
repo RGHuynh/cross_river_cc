@@ -9,10 +9,8 @@ export default class HomepageCompenent extends Component {
     constructor(props) {
         super(props);
         this.changeValue = this.changeValue.bind(this);
-        this.get_loan_amount_total = this.get_loan_amount_total.bind(this)
-        this.get_aws_s3_content = this.get_aws_s3_content.bind(this);
-        this.get_funded_amount_total = this.get_funded_amount_total.bind(this);
-        this.get_funded_amount_inv_total = this.get_funded_amount_inv_total.bind(this);
+        this.get_loan_amount_total = this.get_loan_amount_total.bind(this);
+        this.changeCardValue = this.changeCardValue.bind(this);
         this.state = {
             dropdownValue: '2007',
             loan_amount_total: 0,
@@ -25,62 +23,29 @@ export default class HomepageCompenent extends Component {
         this.setState({
             dropdownValue: e.target.innerText
         })
-        this.get_loan_amount_total('issue_d')
-        this.get_loan_amount_total('funded_amnt')
-        this.get_loan_amount_total('funded_amnt_inv')
     }
 
-    get_aws_s3_content(column, changeStateCallback){
-        let sqlCommand = "SELECT " + column + " FROM s3object WHERE issue_d LIKE(" + "'%" + this.state.dropdownValue + "%'" + ")"
-        AwsHTTPService().get_aws_s3_content(sqlCommand, (err, data) =>{
-            const eventStream = data.Payload;
-
-            if(err) return
-            let aws_items = eventStream[0].Records.Payload
-            
-            let aws_formated_items = aws_items.toString().replace(/\n/g, ' ').split(" ")
-            aws_formated_items = aws_formated_items.filter(function(entry) { return entry.trim() != ''; });
-
-            if(changeStateCallback) changeStateCallback(aws_formated_items) 
-        })
+    changeCardValue(e) {
+        e.preventDefault();
+        this.get_loan_amount_total('loan_amnt', 'loan_amount_total');
+        this.get_loan_amount_total('funded_amnt', 'funded_amount_total');
+        this.get_loan_amount_total('funded_amnt_inv', 'funded_amount_inv_total');
     }
 
-    // get_loan_amount_total() {
-    //     let changeStateCallback = (array) => {
-    //         let total = array.reduce((first_amount, second_amount) => parseInt(first_amount) + parseInt(second_amount))
-    //         this.setState({
-    //             loan_amount_total: total
-    //         })
-    //     }
-    //     this.get_aws_s3_content('loan_amnt', changeStateCallback);
-    // }
+    get_loan_amount_total(column, set_state) {
 
-    get_funded_amount_total() {
-        let changeStateCallback = (array) => {
-            let total = array.reduce((first_amount, second_amount) => parseInt(first_amount) + parseInt(second_amount))
-            this.setState({
-                funded_amount_total: total
-            })
+        let changeStateCallback = (array, stateName) => {
+            let total = array.reduce((first_amount, second_amount) => parseFloat(first_amount) + parseFloat(second_amount))
+            let updatedState = {}
+            updatedState[stateName] = total
+            this.setState(updatedState)
         }
-        this.get_aws_s3_content('funded_amnt', changeStateCallback);
-    }
 
-    get_funded_amount_inv_total() {
-        let changeStateCallback = (array) => {
-            let total = array.reduce((first_amount, second_amount) => parseInt(first_amount) + parseInt(second_amount))
-            this.setState({
-                funded_amount_inv_total: total
-            })
-        }
-        this.get_aws_s3_content('funded_amnt_inv', changeStateCallback);
-    }
-
-    get_loan_amount_total() {
-        // var data = AwsHTTPService().body_data(column, this.state.dropdownValue)
-        var params_data = AwsHTTPService().params("issue_d", "2011")
+        var params_data = AwsHTTPService().params(column, this.state.dropdownValue)
         AwsHTTPService().get_aws_s3_content(params_data).then(function(response) {
-            console.log(response)
-            
+            if(response.data.body){
+                changeStateCallback(response.data.body.filter(function(entry) { return entry.trim() != ''; }), set_state)
+            }    
         })
     }
 
@@ -88,7 +53,7 @@ export default class HomepageCompenent extends Component {
         return(
             <div className="content-wrapper">
                 <div className="year-selection-wrapper mt-5">
-                    <YearSelectionComponent dropdownValue={this.state.dropdownValue} changeValue={this.changeValue}/>
+                    <YearSelectionComponent dropdownValue={this.state.dropdownValue} changeValue={this.changeValue} changeCardValue={this.changeCardValue}/>
                 </div>
                 <div className="total-section-wrapper mt-5">
                     <TotalAppliedCardComponent heading="Total Amount Applied For" amount={this.state.loan_amount_total}/>
@@ -97,7 +62,7 @@ export default class HomepageCompenent extends Component {
                 </div>
                 <div className="line-chart--wrapper">
                     <LineChartComponent />
-                    <p>{this.get_loan_amount_total()}</p>
+                    
                 </div>
             </div>
         )
