@@ -25,9 +25,9 @@ export default class HomepageCompenent extends Component {
         this.setState({
             dropdownValue: e.target.innerText
         })
-        this.get_loan_amount_total()
-        this.get_funded_amount_total()
-        this.get_funded_amount_inv_total()
+        this.get_loan_amount_total('issue_d')
+        this.get_loan_amount_total('funded_amnt')
+        this.get_loan_amount_total('funded_amnt_inv')
     }
 
     get_aws_s3_content(column, changeStateCallback){
@@ -45,15 +45,15 @@ export default class HomepageCompenent extends Component {
         })
     }
 
-    get_loan_amount_total() {
-        let changeStateCallback = (array) => {
-            let total = array.reduce((first_amount, second_amount) => parseInt(first_amount) + parseInt(second_amount))
-            this.setState({
-                loan_amount_total: total
-            })
-        }
-        this.get_aws_s3_content('loan_amnt', changeStateCallback);
-    }
+    // get_loan_amount_total() {
+    //     let changeStateCallback = (array) => {
+    //         let total = array.reduce((first_amount, second_amount) => parseInt(first_amount) + parseInt(second_amount))
+    //         this.setState({
+    //             loan_amount_total: total
+    //         })
+    //     }
+    //     this.get_aws_s3_content('loan_amnt', changeStateCallback);
+    // }
 
     get_funded_amount_total() {
         let changeStateCallback = (array) => {
@@ -75,6 +75,15 @@ export default class HomepageCompenent extends Component {
         this.get_aws_s3_content('funded_amnt_inv', changeStateCallback);
     }
 
+    get_loan_amount_total() {
+        // var data = AwsHTTPService().body_data(column, this.state.dropdownValue)
+        var params_data = AwsHTTPService().params("issue_d", "2011")
+        AwsHTTPService().get_aws_s3_content(params_data).then(function(response) {
+            console.log(response)
+            
+        })
+    }
+
     render(){
         return(
             <div className="content-wrapper">
@@ -88,6 +97,7 @@ export default class HomepageCompenent extends Component {
                 </div>
                 <div className="line-chart--wrapper">
                     <LineChartComponent />
+                    <p>{this.get_loan_amount_total()}</p>
                 </div>
             </div>
         )
