@@ -1,0 +1,8 @@
+.total-section-wrapper {
+    display: flex;
+}
+
+.line-chart--wrapper {
+    width: 100%;
+    display: flex;
+}
