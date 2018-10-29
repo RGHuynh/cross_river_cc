@@ -81,13 +81,11 @@ export default class HomepageCompenent extends Component {
             let paramsData = AwsHTTPService().loanVolume(this.state.dropdownValue, month)
             AwsHTTPService().getAwsLoanAvg(paramsData).then((response) => {
                 if(response.data.body) {
-                    console.log(parseInt(response.data.body.filter(function(entry) { return entry.trim() != ''; })))
                     month_Datas[month] += parseInt(response.data.body.filter(function(entry) { return entry.trim() != ''; }))
                     this.setState({
                         monthDatas: month_Datas
                     })
-                    console.log(this.state.monthDatas)
-                    
+            
                 }
             }) 
         })
