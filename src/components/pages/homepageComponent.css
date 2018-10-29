@@ -4,4 +4,5 @@
 
 .line-chart--wrapper {
     width: 100%;
+    display: flex;
 }

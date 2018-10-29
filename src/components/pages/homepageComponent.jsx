@@ -4,6 +4,7 @@ import YearSelectionComponent from '../yearSelectionComponent/yearSelectionCompo
 import TotalAppliedCardComponent from '../totalAppliedCardComponent/totalAppliedCardComponent';
 import LineChartComponent from '../lineChartComponent/lineChartComponent';
 import AwsHTTPService from '../../services/awsHTTPService/awsHTTPService';
+import BarChartComponent from '../barChartComponent/barChartComponent';
 
 export default class HomepageCompenent extends Component {
     constructor(props) {
@@ -11,14 +12,15 @@ export default class HomepageCompenent extends Component {
         this.changeValue = this.changeValue.bind(this);
         this.get_loan_amount_total = this.get_loan_amount_total.bind(this);
         this.changeCardValue = this.changeCardValue.bind(this);
+        this.getLoanAvg = this.getLoanAvg.bind(this);
         this.state = {
             dropdownValue: '2007',
             loan_amount_total: 0,
             funded_amount_total: 0,
-            funded_amount_inv_total: 0
+            funded_amount_inv_total: 0,
+            loanDatas: []
         }
     }
-
     changeValue(e) {
         this.setState({
             dropdownValue: e.target.innerText
@@ -30,10 +32,10 @@ export default class HomepageCompenent extends Component {
         this.get_loan_amount_total('loan_amnt', 'loan_amount_total');
         this.get_loan_amount_total('funded_amnt', 'funded_amount_total');
         this.get_loan_amount_total('funded_amnt_inv', 'funded_amount_inv_total');
+        this.getLoanAvg()
     }
 
     get_loan_amount_total(column, set_state) {
-
         let changeStateCallback = (array, stateName) => {
             let total = array.reduce((first_amount, second_amount) => parseFloat(first_amount) + parseFloat(second_amount))
             let updatedState = {}
@@ -49,6 +51,28 @@ export default class HomepageCompenent extends Component {
         })
     }
 
+    getLoanAvg() {
+        let grades = ["A", "B", "C", "D", "E", "F", "G"]
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+        let gradeDatas = {"A": [], "B": [], "C": [], "D": [], "E": [], "F": [], "G": []}
+        grades.forEach((grade)=> {
+            months.forEach((month) => {
+                let paramsData = AwsHTTPService().loanAvgParams(this.state.dropdownValue, grade, month)
+                AwsHTTPService().getAwsLoanAvg(paramsData).then((response) => {
+                    if(response.data.body) {
+                        gradeDatas[grade].push(parseInt(response.data.body.filter(function(entry) { return entry.trim() != ''; })))
+                        this.setState({
+                            loanDatas: gradeDatas
+                        })
+                        console.log(this.state.loanDatas)
+                    }
+                }) 
+            })
+        })
+    }
+    
+
+
     render(){
         return(
             <div className="content-wrapper">
@@ -60,8 +84,9 @@ export default class HomepageCompenent extends Component {
                     <TotalAppliedCardComponent heading="Total Amount Funded" amount={this.state.funded_amount_total}/>
                     <TotalAppliedCardComponent heading="Total Committed by Investors" amount={this.state.funded_amount_inv_total}/>
                 </div>
-                <div className="line-chart--wrapper">
-                    <LineChartComponent />
+                <div className="line-chart--wrapper mt-4">
+                    <LineChartComponent loanDatas={this.state.loanDatas}/>
+                    <BarChartComponent />
                     
                 </div>
             </div>
