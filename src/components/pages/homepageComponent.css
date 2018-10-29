@@ -5,4 +5,9 @@
 .line-chart--wrapper {
     width: 100%;
     display: flex;
+    justify-content: space-around;
+}
+
+body{
+    background-color: rgb(235, 235, 235);
 }

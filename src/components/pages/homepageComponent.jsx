@@ -81,13 +81,11 @@ export default class HomepageCompenent extends Component {
             let paramsData = AwsHTTPService().loanVolume(this.state.dropdownValue, month)
             AwsHTTPService().getAwsLoanAvg(paramsData).then((response) => {
                 if(response.data.body) {
-                    console.log(parseInt(response.data.body.filter(function(entry) { return entry.trim() != ''; })))
                     month_Datas[month] += parseInt(response.data.body.filter(function(entry) { return entry.trim() != ''; }))
                     this.setState({
                         monthDatas: month_Datas
                     })
-                    console.log(this.state.monthDatas)
-                    
+            
                 }
             }) 
         })
@@ -95,7 +93,7 @@ export default class HomepageCompenent extends Component {
 
     render(){
         return(
-            <div className="content-wrapper">
+            <div className="content-wrapper content-wrapper--color">
                 <div className="year-selection-wrapper mt-5">
                     <YearSelectionComponent dropdownValue={this.state.dropdownValue} changeValue={this.changeValue} changeCardValue={this.changeCardValue}/>
                 </div>
