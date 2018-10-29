@@ -93,7 +93,7 @@ export default class HomepageCompenent extends Component {
 
     render(){
         return(
-            <div className="content-wrapper">
+            <div className="content-wrapper content-wrapper--color">
                 <div className="year-selection-wrapper mt-5">
                     <YearSelectionComponent dropdownValue={this.state.dropdownValue} changeValue={this.changeValue} changeCardValue={this.changeCardValue}/>
                 </div>
