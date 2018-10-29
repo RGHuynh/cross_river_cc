@@ -4,35 +4,21 @@ This is a graph application that shows loans by year
 ## Getting Started
 
 ### Prerequisites
-Version require
+Version required
 ```
 nodejs - v8.11.3
 npm - v6.4.1
 ```
-What things you need to install the software and how to install them
+What things you need to install 
 
-```
-$ npm install
-```
-## Config
-Highcharts has a bug in their source file
+- Need to download Google browser extension "Allow-Control-Allow-Origin: *" to bypass CORS
 
-Here is how you fix it
-
-1. Go to directory node_modules/highcharts-react-official/src/HighchartsReact.js
-
-2. Remove from line 63
+- Run
 
     ```
-        moudle.exports - HighchartsReact;
-    ```
-3. Put export infront of class HighchartsReact
-
-    ```
-        export default class HighchartsReact
+    $ npm install
     ```
 
-4. Save
 
 
 
