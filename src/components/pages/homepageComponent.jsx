@@ -13,12 +13,14 @@ export default class HomepageCompenent extends Component {
         this.get_loan_amount_total = this.get_loan_amount_total.bind(this);
         this.changeCardValue = this.changeCardValue.bind(this);
         this.getLoanAvg = this.getLoanAvg.bind(this);
+        this.getLoanVolume = this.getLoanVolume.bind(this);
         this.state = {
             dropdownValue: '2007',
             loan_amount_total: 0,
             funded_amount_total: 0,
             funded_amount_inv_total: 0,
-            loanDatas: []
+            loanDatas: [],
+            monthDatas: []
         }
     }
     changeValue(e) {
@@ -33,6 +35,7 @@ export default class HomepageCompenent extends Component {
         this.get_loan_amount_total('funded_amnt', 'funded_amount_total');
         this.get_loan_amount_total('funded_amnt_inv', 'funded_amount_inv_total');
         this.getLoanAvg()
+        this.getLoanVolume()
     }
 
     get_loan_amount_total(column, set_state) {
@@ -64,7 +67,6 @@ export default class HomepageCompenent extends Component {
                         this.setState({
                             loanDatas: gradeDatas
                         })
-                        console.log(this.state.loanDatas)
                     }
                 }) 
             })
@@ -72,6 +74,24 @@ export default class HomepageCompenent extends Component {
     }
     
 
+    getLoanVolume(){
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+        let month_Datas = {"Jan": 0, "Feb": 0, "Mar": 0, "Apr": 0, "May": 0, "Jun": 0, "Jul": 0, "Aug": 0, "Sept": 0, "Oct": 0, "Nov": 0, "Dec": 0}
+        months.forEach((month) => {
+            let paramsData = AwsHTTPService().loanVolume(this.state.dropdownValue, month)
+            AwsHTTPService().getAwsLoanAvg(paramsData).then((response) => {
+                if(response.data.body) {
+                    console.log(parseInt(response.data.body.filter(function(entry) { return entry.trim() != ''; })))
+                    month_Datas[month] += parseInt(response.data.body.filter(function(entry) { return entry.trim() != ''; }))
+                    this.setState({
+                        monthDatas: month_Datas
+                    })
+                    console.log(this.state.monthDatas)
+                    
+                }
+            }) 
+        })
+    }
 
     render(){
         return(
@@ -86,7 +106,7 @@ export default class HomepageCompenent extends Component {
                 </div>
                 <div className="line-chart--wrapper mt-4">
                     <LineChartComponent loanDatas={this.state.loanDatas}/>
-                    <BarChartComponent />
+                    <BarChartComponent  monthDatas={this.state.monthDatas}/>
                     
                 </div>
             </div>

@@ -6,7 +6,8 @@ export default function AwsHTTPService() {
        get_aws_s3_content: get_aws_s3_content,
        body_data: body_data,
        loanAvgParams: loanAvgParams,
-       getAwsLoanAvg: getAwsLoanAvg
+       getAwsLoanAvg: getAwsLoanAvg,
+       loanVolume: loanVolume
 
     }
 
@@ -50,6 +51,16 @@ export default function AwsHTTPService() {
                  contentType: "application/json"
          }
          return params_data;
+     }
+
+     function loanVolume(year, month) {
+         let params_data = {
+            method: "GET",
+            url: "https://w8vn537gvi.execute-api.us-east-1.amazonaws.com/prod/loanvolume?year=" + year +"&month=" + month,
+            dataType: "json",
+            contentType: "application/json"
+        }
+        return params_data;
      }
     
 }

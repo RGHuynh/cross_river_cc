@@ -1,3 +1,4 @@
 .linechart--wrapper {
-    width: 3000px;
+    min-width: 310px;
+    height: 400px;
 }
