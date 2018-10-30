@@ -23,12 +23,12 @@ export default class YearSelectionComponent extends Component {
                 <form className="form-inline mx-auto">
                     <div className="form-inline form--size">
                         <div className="form-group mx-auto mt-2 mb-2">
-                            <label className="label--position" htmlFor="year-form" >Select Year</label>
+                            <label className="label--position label-font-color" htmlFor="year-form" >Select Year</label>
                         </div>
                         <div className="vertical-rule mx-auto mt-2 mb-2"></div>
                         <div className="form-group mx-auto mt-2 mb-2">
                             <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                                <DropdownToggle className="button--color" caret>{this.props.dropdownValue}</DropdownToggle>
+                                <DropdownToggle className="dropdown--color" caret>{this.props.dropdownValue}</DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem onClick={this.props.changeValue}>2007</DropdownItem>
                                     <DropdownItem onClick={this.props.changeValue}>2008</DropdownItem>
@@ -43,7 +43,7 @@ export default class YearSelectionComponent extends Component {
                             </ButtonDropdown>
                         </div>
                     </div>
-                    <button onClick={this.props.changeCardValue} className="ml-3 btn-primary">Generate Report</button>
+                    <button onClick={this.props.changeCardValue} className="ml-3 btn-primary button--size button--style">GENERATE REPORT</button>
                 </form>
             </div>
         );
