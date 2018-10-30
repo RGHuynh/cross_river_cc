@@ -1,9 +1,10 @@
 .card--size {
-    width: 400px;
+    width: 300px;
 }
 
 .card-title--size {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .card-price--position {
@@ -11,7 +12,22 @@
     margin: auto;
 }
 
+.card-title__color, .card-price__color {
+    color: #0A2A5B;
+}
+
+.card-price--size {
+    font-size: 14px;
+}
+
 .card--style {
     border: none !important;
     box-shadow: 2px 4px 10px grey;
+    padding-left: 16px;
+    padding-right: 16px;
 }
+
+.divider--position {
+    margin-top: 0px;
+}
+

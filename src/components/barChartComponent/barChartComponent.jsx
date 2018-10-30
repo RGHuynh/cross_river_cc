@@ -1,6 +1,7 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartReact from 'highcharts-react-official';
+import './barChartComponent.css';
 
 function BarChartComponent(props){
 
@@ -11,14 +12,16 @@ function BarChartComponent(props){
         }
     },
     chart: {
+        className: 'barCharComponent',
         type: 'column'
     },
     title: {
         text: 'Monthly Loan Volume',
-        align: 'left'
+        align: 'left',
+        style: { "color": "#0A2A5B"}
     },
     subtitle: {
-        text: 'Lending Club - Monthly Loan Vloume for Year 2012'
+        text: 'Lending Club - Monthly Loan Volume for Year 2012'
     },
     xAxis: {
             title: {
@@ -63,7 +66,7 @@ function BarChartComponent(props){
 
     
     return(
-        <div>
+        <div className="barChart--wrapper">
             <HighchartReact 
                 highcharts={Highcharts}
                 options={options}

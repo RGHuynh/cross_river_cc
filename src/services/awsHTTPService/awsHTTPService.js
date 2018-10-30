@@ -30,7 +30,8 @@ export default function AwsHTTPService() {
                 method: "GET",
                 url: "https://w8vn537gvi.execute-api.us-east-1.amazonaws.com/prod/loans?column=" + column +"&year=" + year,
                 dataType: "json",
-                contentType: "application/json"
+                contentType: "application/json",
+                headers: {"Access-Control-Allow-Origin": "*"}
         }
         return params_data;
     }
@@ -48,7 +49,8 @@ export default function AwsHTTPService() {
                  method: "GET",
                  url: "https://w8vn537gvi.execute-api.us-east-1.amazonaws.com/prod/loanavg?year=" + year +"&grade=" + grade + "&month=" + month,
                  dataType: "json",
-                 contentType: "application/json"
+                 contentType: "application/json",
+                 headers: {"Access-Control-Allow-Origin": "*"}
          }
          return params_data;
      }
@@ -58,7 +60,8 @@ export default function AwsHTTPService() {
             method: "GET",
             url: "https://w8vn537gvi.execute-api.us-east-1.amazonaws.com/prod/loanvolume?year=" + year +"&month=" + month,
             dataType: "json",
-            contentType: "application/json"
+            contentType: "application/json",
+            headers: {"Access-Control-Allow-Origin": "*"}
         }
         return params_data;
      }

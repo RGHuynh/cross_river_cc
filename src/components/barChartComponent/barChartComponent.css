@@ -1,0 +1,11 @@
+.barChart--wrapper {
+  margin-left: 8px;
+}
+
+.barCharComponent {
+  min-width: 310px;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto;
+}
+
