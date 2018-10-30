@@ -18,7 +18,7 @@ function BarChartComponent(props){
         align: 'left'
     },
     subtitle: {
-        text: 'Lending Club - Monthly Loan Vloume for Year 2012'
+        text: 'Lending Club - Monthly Loan Volume for Year 2012'
     },
     xAxis: {
             title: {
