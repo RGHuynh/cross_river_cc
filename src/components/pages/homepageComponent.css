@@ -7,9 +7,10 @@
 .line-chart--wrapper {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 body{
-    background-color: rgb(235, 235, 235);
+    background-color: rgba(220, 220, 220, 0.87);
 }
+

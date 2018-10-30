@@ -7,11 +7,13 @@ import HighchartReact from 'highcharts-react-official';
 function lineChartComponent(props) {
     const options = {
         chart: {
+            className: "lineChartComponent",
             type: "line"
           },
           title: {
             text: "Loans By Credit Grade",
-            align: "left"
+            align: "left",
+            style: { "color": "#0A2A5B"}
           },
           subtitle: {
             text: "Loans Issued by Credit Score (Grade)"

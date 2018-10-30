@@ -1,4 +1,10 @@
 .linechart--wrapper {
-    width: 500px;
+  margin-right: 8px;
+}
+
+.lineChartComponent {
+    min-width: 310px;
+    max-width: 800px;
     height: 400px;
+    margin: 0 auto;
 }
