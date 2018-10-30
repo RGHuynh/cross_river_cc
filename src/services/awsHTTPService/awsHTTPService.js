@@ -28,7 +28,7 @@ export default function AwsHTTPService() {
     function params(column, year) {
        let  params_data = {
                 method: "GET",
-                url: "https://3f1esl6gdh.execute-api.us-east-1.amazonaws.com/prod/lambda?column=" + column +"&year=" + year,
+                url: "https://3f1esl6gdh.execute-api.us-east-1.amazonaws.com/prod/loan?column=" + column +"&year=" + year,
                 dataType: "json",
                 contentType: "application/json"
         }
