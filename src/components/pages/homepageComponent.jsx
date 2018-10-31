@@ -56,7 +56,7 @@ export default class HomepageCompenent extends Component {
 
     getLoanAvg() {
         let grades = ["A", "B", "C", "D", "E", "F", "G"]
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         let gradeDatas = {"A": [], "B": [], "C": [], "D": [], "E": [], "F": [], "G": []}
         grades.forEach((grade)=> {
             months.forEach((month) => {
@@ -75,7 +75,7 @@ export default class HomepageCompenent extends Component {
     
 
     getLoanVolume(){
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         let month_Datas = {"Jan": 0, "Feb": 0, "Mar": 0, "Apr": 0, "May": 0, "Jun": 0, "Jul": 0, "Aug": 0, "Sept": 0, "Oct": 0, "Nov": 0, "Dec": 0}
         months.forEach((month) => {
             let paramsData = AwsHTTPService().loanVolume(this.state.dropdownValue, month)

@@ -56,7 +56,7 @@ function BarChartComponent(props){
             ['Jun', props.monthDatas.Jun],
             ['Jul', props.monthDatas.Jul],
             ['Aug', props.monthDatas.Aug],
-            ['Sept', props.monthDatas.Sept],
+            ['Sep', props.monthDatas.Sept],
             ['Oct', props.monthDatas.Oct],
             ['Nov', props.monthDatas.Nov],
             ['Dec', props.monthDatas.Dec]
